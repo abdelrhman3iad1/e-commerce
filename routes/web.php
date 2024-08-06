@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\User\UserProductController;
+use App\Http\Controllers\Web\CartController;
+use App\Http\Controllers\Web\OrderController;
+use App\Http\Controllers\Web\ProductController;
+use App\Http\Controllers\Admin\ProductController as ProductAdmin;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +35,8 @@ Route::middleware([
 
 Route::get("/redirect", [HomeController::class, "redirectTo"]);
 
-Route::controller(ProductController::class)->middleware("is_admin")->group(function () {
+
+Route::controller(ProductAdmin::class)->middleware("is_admin")->group(function () {
     Route::get("products/create", "create");
     Route::post("products/", "store")->name("store");
     Route::get("products/", "allProducts");
@@ -40,22 +44,32 @@ Route::controller(ProductController::class)->middleware("is_admin")->group(funct
     Route::get("products/edit/{id}", "edit");
     Route::put("products/{id}", "update");
     Route::delete("products/{id}", "delete");
+
 });
 
-Route::get("change/{lang}",function($lang){
-    if($lang == "ar"){
-        session()->put("lang","ar");
-    }else{
-        session()->put("lang","en");
+Route::get("change/{lang}", function ($lang) {
+    if ($lang == "ar") {
+        session()->put("lang", "ar");
+    } else {
+        session()->put("lang", "en");
     }
     return redirect()->back();
 });
 
-Route::controller(UserProductController::class)->group(function(){
-    Route::get("","all");
-    Route::get("show/{id}","show");
-    Route::get("search","search");
-    Route::post("addToCart/{id}","addToCart");
-    Route::get("mycart","mycart");
-    Route::post("makeOrder","makeOrder");
+Route::controller(ProductController::class)->group(function () {
+    Route::get("", "all");
+    Route::get("show/{id}", "show");
+    Route::get("search", "search");
+    /*Route::post("addToCart/{id}", "addToCart");
+    Route::get("mycart", "mycart");
+    Route::post("makeOrder", "makeOrder");*/
+});
+
+Route::controller(CartController::class)->group(function () {
+    Route::post("addToCart/{id}", "addToCart");
+    Route::get("mycart", "mycart");
+});
+
+Route::controller(OrderController::class)->group(function () {
+    Route::post("makeOrder", "makeOrder");
 });
