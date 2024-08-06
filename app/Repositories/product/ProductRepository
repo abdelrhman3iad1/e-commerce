@@ -1,0 +1,34 @@
+<?php
+namespace App\Repositories;
+
+use App\Models\Category;
+use App\Models\Product;
+use App\Repositories\product\ProductRepositoryInterface;
+use Illuminate\Support\Facades\Request;
+
+class ProductRepository implements ProductRepositoryInterface{
+    public function allProducts(){
+       return Product::all();
+    }
+    public function create(){
+        return  Category::all();
+    }
+    public function store($data){
+       return Product::create($data);
+    }
+    public function update($data , $id){
+        $product = Product::findOrFail($id);
+        $product->update($data);
+        return $product ;
+    }
+
+    public function edit( $id){
+        $product = Product::findOrFail($id);
+        return $product ;
+    }
+    public function delete($id){
+        $product = Product::findOrFail($id);
+        $product->delete();
+    }
+   
+}

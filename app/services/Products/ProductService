@@ -1,0 +1,34 @@
+<?php 
+namespace App\Services\Products;
+
+use App\Models\Product;
+use App\Repositories\product\ProductRepositoryInterface;
+
+class ProductService{
+    protected function __construct(
+        protected ProductRepositoryInterface $productRepository){
+     
+
+        }
+    public function all(){
+            return $this->productRepository->allProducts();
+    } 
+    public function create($data){
+            return $this->productRepository->create();
+    }
+  
+    public function update($id ,$data){
+        return $this->productRepository->update($id , $data);
+    }
+
+    public function edit($data){
+        return $this->productRepository->edit($data);
+    }
+    public function store($data){
+        return $this->productRepository->store($data);
+    }
+
+    public function delete($id){
+        return $this->productRepository->delete($id);
+    }
+}

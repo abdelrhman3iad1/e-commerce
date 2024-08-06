@@ -1,0 +1,14 @@
+<?php
+namespace App\Repositories\product;
+
+use Illuminate\Support\Facades\Request;
+
+Interface ProductRepositoryInterface{
+    
+    public function allProducts();
+    public function create();
+    public function store($data);
+    public function edit($id);
+    public function update($data, $id); 
+    public function delete($id);
+}
