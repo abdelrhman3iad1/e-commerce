@@ -33,7 +33,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get("/redirect", [HomeController::class, "redirectTo"]);
+Route::get("/home", [HomeController::class, "redirectTo"]);
 
 
 Route::controller(ProductAdmin::class)->middleware("is_admin")->group(function () {

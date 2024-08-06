@@ -10,12 +10,7 @@ class HomeController extends Controller
 {
     public function redirectTo()
     {
-        if (Auth::user()->role == 1) {
-            return view("Admin.home");
-            return view();
-        } else {
-            $products = Product::all();
-            return view("User.home",compact("products"));
-        }
+        $products = Product::all();
+        return view("User.home",compact("products"));
     }
 }

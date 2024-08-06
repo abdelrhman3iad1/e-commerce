@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Product;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class isAdmin
         if(Auth::user()->role == 1){
             return $next($request);
         }else{
-            return redirect(url("/redirect"));
+            return redirect("/home");
         }
         
     }
