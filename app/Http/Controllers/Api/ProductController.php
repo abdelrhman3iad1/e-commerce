@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
-class ApiProductController extends Controller
+class ProductController extends Controller
 {
+    
     public function all()
     {
         $products = Product::all();
@@ -126,5 +128,5 @@ class ApiProductController extends Controller
             ],201);
         }
     }
-    
+
 }
