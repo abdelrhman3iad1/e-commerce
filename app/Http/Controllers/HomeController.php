@@ -12,6 +12,7 @@ class HomeController extends Controller
     {
         if (Auth::user()->role == 1) {
             return view("Admin.home");
+            return 0;
         } else {
             $products = Product::all();
             return view("User.home",compact("products"));
